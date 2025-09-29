@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手部关键点识别与手势检测</title>
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- 引入MediaPipe等外部库 -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>手部关键点识别与手势检测</h1>
+            <p class="subtitle">基于MediaPipe的实时手部21个关键点检测与手势识别</p>
+        </header>
+
+        <div class="content">
+            <div class="video-panel">
+            <h2 class="panel-title">实时识别</h2>
+            <div class="video-container">
+                <video id="videoElement" playsinline></video>
+                <canvas id="canvasElement" class="canvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <!-- 添加到controls div中 -->
+                <div class="experiment-controls">
+                    <h3>实验设置</h3>
+                    <div class="control-group">
+                         <label for="sessionId">会话ID:</label>
+                        <input type="text" id="sessionId" placeholder="输入会话标识">
+                    </div>
+
+                    <div class="control-group">
+                    <label for="networkType">网络类型:</label>
+                    <select id="networkType">
+            <option value="wifi">Wi-Fi</option>
+            <option value="4g">4G</option>
+            <option value="5g">5G</option>
+            <option value="ethernet">以太网</option>
+        </select>
+    </div>
+
+    <div class="control-group">
+        <label for="resolution">分辨率:</label>
+        <select id="resolution">
+            <option value="640x480">640x480</option>
+            <option value="1280x720">1280x720</option>
+            <option value="1920x1080">1920x1080</option>
+        </select>
+    </div>
+
+    <button id="exportData" class="btn btn-primary">导出CSV数据</button>
+    <button id="resetData">重置数据</button>
+</div>
+                <button id="startButton">开始识别</button>
+                <button id="stopButton">停止识别</button>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h2 class="panel-title">检测信息</h2>
+
+            <div class="info-item">
+                <span class="info-label">状态:</span>
+                <span id="statusElement" class="info-value">等待开始</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">帧率 (FPS):</span>
+                <span id="fpsElement" class="info-value">0</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">延迟 (ms):</span>
+                <span id="latencyElement" class="info-value">0</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">检测到的手部数量:</span>
+                <span id="handsCountElement" class="info-value">0</span>
+            </div>
+
+            <div class="gesture-display">
+                <div class="info-label">识别手势:</div>
+                <div id="gestureElement" class="gesture-value">-</div>
+            </div>
+        </div>
+        </div>
+
+        <div class="instructions">
+            <h2>使用说明</h2>
+        <ul>
+            <li>点击"开始识别"按钮启动摄像头并开始手部检测</li>
+            <li>将手放置在摄像头前，确保光线充足</li>
+            <li>系统将自动识别手部21个关键点并绘制连接线</li>
+            <li>尝试做出数字1-5的手势，系统将识别并显示结果</li>
+            <li>点击"停止识别"可随时停止摄像头</li>
+            <li>手势识别包括：数字1（食指伸直）、数字2（食指和中指伸直）等</li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- 在body结束前引入外部JS文件 -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
