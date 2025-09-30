@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>手部关键点识别与手势检测</title>
-    <!-- 引入外部CSS文件 -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- 引入MediaPipe等外部库 -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
@@ -105,8 +103,7 @@
         </ul>
         </div>
     </div>
+    <script type="module" src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <!-- 在body结束前引入外部JS文件 -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
